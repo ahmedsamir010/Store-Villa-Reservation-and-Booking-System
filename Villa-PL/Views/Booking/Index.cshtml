@@ -1,0 +1,47 @@
+﻿<link rel="stylesheet" href="~/css/Spinner.css" asp-append-version="true" />
+
+<div class="container-fluid mt-5">
+    <div class="card border-0 shadow">
+        <div class="card-header bg-success text-white text-center">
+            <h2>Booking List</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-12">
+                    <div class="d-flex justify-content-end">
+                        <div class="btn-group" role="group">
+                            <a type="button" class="btn btn-outline-primary" asp-action="Index" asp-controller="Booking" asp-route-status="@Const.BookingStatus.Pending">@Const.BookingStatus.Pending</a>
+                            <a type="button" class="btn btn-outline-success" asp-action="Index" asp-controller="Booking" asp-route-status="@Const.BookingStatus.Completed">@Const.BookingStatus.Completed</a>
+                            <a type="button" class="btn btn-outline-danger" asp-action="Index" asp-controller="Booking" asp-route-status="@Const.BookingStatus.Cancelled">@Const.BookingStatus.Cancelled</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="loading spinner" style="display:none"></div>
+
+            <table id="BookingTable" class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Booking ID</th>
+                        <th>Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Status</th>
+                        <th>Check In Date</th>
+                        <th>Nights</th>
+                        <th>Total Cost</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <script src="~/js/booking.js"></script>
+   
+
+}

@@ -1,0 +1,71 @@
+﻿@model Villa
+
+<div class="modal fade" id="EditVillaModal-@Model.Id" tabindex="-1" aria-labelledby="editModalLabel-@Model.Id" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Edit Villa</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="Villa" asp-action="SaveEdit" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="Sqft" />
+                    <input type="hidden" asp-for="Occupancy" />
+                    <input type="hidden" asp-for="Price" />
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="Name" class="form-label">Villa Name</label>
+                            <input asp-for="Name" class="form-control" placeholder="Enter Villa Name" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="Description" class="form-label">Description</label>
+                            <textarea asp-for="Description" class="form-control" placeholder="Enter Villa Description"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <label for="Image" class="form-label">Upload Image</label>
+                            <input type="file" asp-for="Image" class="form-control" onchange="previewImage(this)" />
+                            <span asp-validation-for="Image" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <img id="imagePreview" src="@Url.Content(Model.ImageUrl)" alt="@Model.Name" class="img-fluid mt-3" />
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        // JavaScript function to update the image preview
+        function previewImage(input) {
+            console.log("Function executed");  // Add this line
+            var file = input.files[0];
+            if (file) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('imagePreview').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+
+</div>

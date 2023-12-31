@@ -1,0 +1,103 @@
+﻿    <!DOCTYPE html>
+    <html lang="en" data-bs-theme="dark">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>@ViewData["Title"] - Villa Store</title>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+        <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+        <link rel="stylesheet" href="~/Villa_PL.styles.css" asp-append-version="true" />
+        <link rel="stylesheet" href="//cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css" />
+        <link rel="stylesheet" href="~/css/apexcharts.css" />
+    </head>
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
+                <div class="container-fluid d-flex justify-content-between">
+                    <p class="navbar-brand" asp-area="">Store Villa Sakr</p>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+                <partial name="_LoginPartialAdmin" />
+            </nav>
+        </header>
+
+        <div class="container-fluid">
+            <div class="loading spinner" style="display:none;"></div>
+            <div class="row">
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+                    <div class="position-static pt-3">
+                        <ul class="navbar-nav">
+                            <li>
+                                <div class="text-muted small fw-bold text-uppercase px-3">
+                                    Menu
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Dashboard" asp-action="Index">
+                                    <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            <li>
+                                <div class="text-muted small fw-bold text-uppercase px-3 mt-2">
+                                    Content Management
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Villa" asp-action="Index">
+                                    <span class="me-2"><i class="bi bi-house-door"></i></span>
+                                    <span>Villa</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="VillaNumber" asp-action="Index">
+                                    <span class="me-2"><i class="bi bi-list-ol"></i></span>
+                                    <span>Villa Number</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Amenity" asp-action="Index">
+                                    <span class="me-2"><i class="bi bi-building"></i></span>
+                                    <span>Amenity</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Booking" asp-action="Index" asp-route-status="@Const.BookingStatus.Completed">
+                                    <span class="me-2"><i class="bi bi-journal-plus"></i></span>
+                                    <span>Booking</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <main class="col-md-9 col-lg-10 ">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 w-100">
+                        @RenderBody()
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="//cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js" asp-append-version="true"></script>
+        <script src="~/js/apexcharts.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('[data-toggle="modal"]').click(function () {
+                    var targetModal = $(this).data('target');
+                    $(targetModal).modal('show');
+                });
+            });
+        </script> 
+        @await RenderSectionAsync("Scripts", required: false)
+        @await Component.InvokeAsync("NToastNotify")
+    </body>
+    </html>

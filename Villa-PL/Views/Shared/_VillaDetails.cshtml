@@ -1,0 +1,63 @@
+﻿@model Villa
+
+<div class="row">
+    <div class="col-12 col-md-5">
+        @if (Model != null && !string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <img src="@Model.ImageUrl" class="img-fluid rounded" alt="Villa Image" />
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                No image available
+            </div>
+        }
+    </div>
+    <div class="container-fluid col-md-7">
+        <div class="row p-4">
+            <div class="col-12">
+                @if (Model != null)
+                {
+                    <h2 class="display-4">@Model.Name</h2>
+                    <p class="lead text-muted">
+                        @Html.Raw(Model.Description ?? "No description available")
+                    </p>
+                    @if (Model.VillaAmenity != null && Model.VillaAmenity.Any())
+                    {
+                        <h5 class="mb-3">Villa Amenities</h5>
+                        <ul class="list-unstyled">
+                            @foreach (var amenity in Model.VillaAmenity)
+                            {
+                                <li>@amenity?.Name</li>
+                            }
+                        </ul>
+                    }
+                }
+                else
+                {
+                    <div class="alert alert-warning" role="alert">
+                        No villa details available
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="container-fluid row col-12">
+            <div class="text-end pt-3">
+                @if (Model != null)
+                {
+                    <p class="h5">Max Occupancy: @Model.Occupancy adults</p>
+                    <p>Villa Size: @Model.Sqft sqft</p>
+                    <p class="lead">
+                        AED @Model.Price.ToString("N2", new System.Globalization.CultureInfo("en-AE"))
+                    </p>
+                }
+                else
+                {
+                    <div class="alert alert-warning" role="alert">
+                        No villa details available
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

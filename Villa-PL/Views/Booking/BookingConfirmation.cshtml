@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Booking Confirmation</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .additional-info {
+            font-size: 16px;
+            color: #777;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .confirmation-list-item {
+            background-color: #28a745;
+            color: #fff;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+            .confirmation-list-item::before {
+                content: "✓";
+                margin-right: 10px;
+                font-size: 20px;
+            }
+
+        .confirmation-message {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .RedirectHome {
+            background-image: linear-gradient( to right, #54b3d6, #54b3d6 50%, #000 50% );
+            background-size: 200% 100%;
+            background-position: -100%;
+            display: inline-block;
+            padding: 10px 20px;
+            position: relative;
+            font-size: 20px;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+            .RedirectHome:before {
+                content: '';
+                background: #54b3d6;
+                display: block;
+                position: absolute;
+                bottom: -3px;
+                left: 0;
+                width: 0;
+                height: 3px;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .RedirectHome:hover {
+                background-position: 0;
+            }
+
+                .RedirectHome:hover::before {
+                    width: 100%;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Booking Confirmation</h2>
+        <p class="confirmation-message">Your booking with Number <strong>@Model</strong> has been confirmed successfully! Thank you for choosing us.</p>
+        <img src="~/Images//OrderConfirmation.jpeg" alt="Booking Image" />
+        <div class="additional-info">
+            <p>Additional information about your booking:</p>
+            <ul class="confirmation-list">
+                <li class="confirmation-list-item">Total Cost: @ViewBag.TotalCost</li>
+                <li class="confirmation-list-item">Nights: @ViewBag.Nights</li>
+            </ul>
+        </div>
+        <a class="RedirectHome" asp-controller="Home" asp-action="Index">Return to Homepage</a>
+    </div>
+
+</body>
+</html>

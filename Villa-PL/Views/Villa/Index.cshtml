@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Villa>
+
+<div class="container-fluid mt-5">
+    <div class="card border-0 shadow">
+        <div class="card-header bg-success text-white text-center">
+            <h2>Villa List</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6 offset-6 text-end">
+                    <a asp-controller="Villa" asp-action="Create" class="btn btn-secondary">
+                        <i class="bi bi-plus-circle"></i> Create New Villa
+                    </a>
+                </div>
+            </div>
+
+            @if (Model.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Name</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Sqft</th>
+                            <th class="text-center">Occupancy</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model)
+                        {
+                            <tr class="text-center align-middle">
+                                <td>@obj.Name</td>
+                                <td>@obj.Price</td>
+                                <td>@obj.Sqft</td>
+                                <td>@obj.Occupancy</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-warning me-2" data-toggle="modal" data-target="#DetailsVillaModal-@obj.Id">
+                                            <i class="bi bi-info-square"></i> Details
+                                        </button>
+                                        @await Html.PartialAsync("DetailsVillaPartialView", obj)
+
+                                        <button type="button" class="btn btn-outline-success me-2" data-toggle="modal" data-target="#EditVillaModal-@obj.Id">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </button>
+                                        @await Html.PartialAsync("EditVillaPartialView", obj)
+
+                                        <button type="button" class="btn btn-outline-danger me-2" data-toggle="modal" data-target="#DeleteVillaModal-@obj.Id">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </button>
+                                        @await Html.PartialAsync("DeleteVillaPartialView", obj)
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="container-fluid">
+                <div class="text-center">
+                    <p class="lead mb-4">No villas available. Start by creating a new one!</p>
+                    <img src="~/images/empty-villa.jpeg" alt="Empty Villa" class="img-fluid">
+                </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

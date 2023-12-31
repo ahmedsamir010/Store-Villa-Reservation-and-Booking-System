@@ -1,0 +1,81 @@
+﻿@model VillaNumberVM
+
+<div class="container-fluid mt-5 villaNumber">
+    <div class="card border-0 shadow">
+        <div class="card-header bg-success text-white text-center">
+            <h2>Villa Number List</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6 offset-6 text-end">
+                    <a asp-controller="VillaNumber" asp-action="Create" class="btn btn-secondary">
+                        <i class="bi bi-plus-circle"></i> Create New Villa Number
+                    </a>
+                </div>
+            </div>
+
+            @if (Model.VillaNumbers != null && Model.VillaNumbers.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Villa Name</th>
+                            <th class="text-center">Villa Number</th>
+                            <th class="text-center">Special Data</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model.VillaNumbers)
+                        {
+                            <tr class="text-center align-middle">
+                                <td>@obj.Villa.Name</td>
+                                <td>@obj.Villa_Number</td>
+                                <td>@obj.SpecialDetails</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-outline-warning me-2" data-toggle="modal" data-target="#DetailsVillaNumberModal-@obj.Villa_Number">
+                                            <i class="bi bi-info-square"></i> Details
+                                        </button>
+                                        @await Html.PartialAsync("DetailsVillaNumberPartialView", new VillaNumberVM { villaNumber = obj })
+                                        <button type="button" class="btn btn-outline-success me-2" data-toggle="modal" data-target="#EditVillaNumberModal-@obj.Villa_Number">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </button>
+
+                                        @{
+                                            var villaNumberVM = new VillaNumberVM
+                    {
+                        villaNumber = obj,
+                        villaList = Model.villaList // Assuming villaList is a property of the main view's model
+                    };
+
+                                            Html.RenderPartial("EditVillaNumberPartialView", villaNumberVM);
+                                        }
+
+
+
+
+                                        <button type="button" class="btn btn-outline-danger me-2" data-toggle="modal" data-target="#DeleteVillaNumberModal-@obj.Villa_Number">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </button>
+                                        @await Html.PartialAsync("DeleteVillaNumberPartialView", new VillaNumberVM { villaNumber = obj })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="container-fluid">
+
+                <div class="text-center">
+                    <p class="lead mb-4">No villas Numbers available. Start by creating a new one!</p>
+                    <img src="~/images/empty-villa.jpeg" alt="Empty Villa" class="img-fluid">
+                </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

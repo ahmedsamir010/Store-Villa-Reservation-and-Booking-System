@@ -1,0 +1,144 @@
+﻿@model RegisterVM
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/css/intlTelInput.min.css" />
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    .card {
+        border: 0;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-header {
+        border-radius: 20px 20px 0 0;
+        background: linear-gradient(to right, #5cb85c, #4cae4c);
+        color: #fff;
+    }
+
+    .btn {
+        border-radius: 8px;
+        font-weight: bold;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .btn-outline-success {
+        border-color: #5cb85c;
+        color: #5cb85c;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+        .btn-outline-success:hover {
+            background: linear-gradient(to right, #5cb85c, #4cae4c);
+            color: #fff;
+        }
+
+    .form-floating label {
+        transform: translateY(-10px);
+        font-size: 0.9rem;
+        color: #555;
+    }
+
+    .form-floating input,
+    .form-floating select {
+        padding: 1rem;
+    }
+
+    .form-floating span {
+        display: block;
+        margin-top: 5px;
+        font-size: 0.8rem;
+    }
+
+    .intl-tel-input {
+        width: 100%;
+    }
+</style>
+
+<div class="container pt-5">
+    <div class="card shadow border">
+        <div class="card-header bg-success bg-gradient ml-0 py-4">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <h2 class="py-2 text-white">Join Us - Create Your Account</h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post">
+                <input asp-for="RedirectUrl" hidden />
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row">
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Name" class="form-control" placeholder="Full Name" />
+                        <label asp-for="Name" class="ms-2 text-muted">Full Name</label>
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Email" class="form-control" placeholder="Email" aria-required="true" />
+                        <label asp-for="Email" class="ms-2 text-muted">Email</label>
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="Password" class="form-control" placeholder="Password" />
+                        <label asp-for="Password" class="ms-2 text-muted">Password</label>
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating mb-3 col-md-6">
+                        <input asp-for="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                        <label asp-for="ConfirmPassword" class="ms-2 text-muted">Confirm Password</label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="mb-3 col-12">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="bi bi-phone"></i></span>
+                        <input asp-for="PhoneNumber" id="phoneNumber" class="form-control" required />
+                    </div>
+                    <div class="invalid-feedback">Please enter a valid phone number.</div>
+                </div>
+                <button type="submit" class="w-100 btn btn-lg btn-outline-success">Register</button>
+            </form>
+
+            <div class="mt-3 text-center">
+                <p>Already have an account?</p>
+                <a asp-action="Login" class="btn btn-link text-success">Login here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/intlTelInput.min.js"></script>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Initialize intl-tel-input on the phoneNumber input
+            var input = document.querySelector("#phoneNumber");
+            var iti = window.intlTelInput(input, {
+                separateDialCode: true,
+                utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.12/js/utils.js"
+            });
+
+            // Set the initial value for the Country Code input
+            var countryCodeInput = document.querySelector("#countryCode");
+            countryCodeInput.value = iti.getSelectedCountryData().dialCode;
+
+            // Update the Country Code input when the selected country changes
+            iti.addEventListener("countrychange", function () {
+                countryCodeInput.value = iti.getSelectedCountryData().dialCode;
+            });
+        });
+    </script>
+}

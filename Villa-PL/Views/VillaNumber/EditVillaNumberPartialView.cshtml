@@ -1,0 +1,43 @@
+﻿@model VillaNumberVM
+
+<div class="modal fade" id="EditVillaNumberModal-@Model.villaNumber.Villa_Number" tabindex="-1" aria-labelledby="editModalLabel-@Model.villaNumber.Villa_Number" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">Edit Villa Number</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-controller="VillaNumber" asp-action="SaveEdit">
+                    <div class="form-floating py-1">
+
+         
+                        <select asp-for="villaNumber.VillaId" asp-items="@Model.villaList"
+                                class="form-select border shadow">
+                            <option value="" disabled selected>-----Select Villa-----</option>
+                        </select>
+                        <label asp-for="villaNumber.VillaId" class="ms-2"></label>
+                        <span asp-validation-for="villaNumber.VillaId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating py-1">
+                        <input asp-for="villaNumber.Villa_Number" class="form-control border shadow" />
+                        <label asp-for="villaNumber.Villa_Number" class="ms-2"></label>
+                        <span asp-validation-for="villaNumber.Villa_Number" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-floating py-1">
+                        <input asp-for="villaNumber.SpecialDetails" class="form-control border shadow" />
+                        <label asp-for="villaNumber.SpecialDetails" class="ms-2"></label>
+                        <span asp-validation-for="villaNumber.SpecialDetails" class="text-danger"></span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

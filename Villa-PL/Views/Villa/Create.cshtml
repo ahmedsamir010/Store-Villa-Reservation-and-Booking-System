@@ -1,0 +1,90 @@
+﻿@model Villa
+<div class="w-100 card border-0 p-4">
+    <div class="card-header bg-success bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white py-2">Create Villa</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body border p-4">
+        <form method="post" class="row" enctype="multipart/form-data">
+            <div class="p-3 col-12">
+                <div class="form-floating py-1">
+                    <input asp-for="Name" class="form-control border shadow" />
+                    <label asp-for="Name" class="ms-2"></label>
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1">
+                    <input asp-for="Description" class="form-control border shadow" />
+                    <label asp-for="Description" class="ms-2"></label>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1">
+                    <input asp-for="Price" class="form-control border shadow" type="number" pattern="\d*" />
+                    <label asp-for="Price" class="ms-2"></label>
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1">
+                    <input asp-for="Sqft" class="form-control border shadow" type="number" pattern="\d*" />
+                    <label asp-for="Sqft" class="ms-2"></label>
+                    <span asp-validation-for="Sqft" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1">
+                    <input asp-for="Occupancy" class="form-control border shadow" type="number" pattern="\d*" />
+                    <label asp-for="Occupancy" class="ms-2"></label>
+                    <span asp-validation-for="Occupancy" class="text-danger"></span>
+                </div>
+                <div class="form-floating py-1">
+                    <!-- Input for image selection -->
+                    <input asp-for="Image" type="file" class="form-control border shadow" onchange="displayImagePreview(this)" />
+                    <label asp-for="ImageUrl" class="ms-2"></label>
+                    <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                </div>
+
+                <!-- Image preview container -->
+                <div class="form-floating py-1">
+                    <img id="imagePreview" class="img-thumbnail" style="max-width: 300px; max-height: 200px; display: none;" />
+                </div>
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="bi bi-check-circle"></i> Create
+                        </button>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="Villa" asp-action="Index" class="btn btn-secondary w-100">
+                            <i class="bi bi-x-circle"></i> Cancel
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Function to display image preview
+        function displayImagePreview(input) {
+            var preview = document.getElementById('imagePreview');
+            var file = input.files[0];
+
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                }
+
+                reader.readAsDataURL(file);
+            } else {
+                preview.style.display = 'none';
+            }
+        }
+    </script>
+    <partial name="_ValidationScriptsPartial" />
+}

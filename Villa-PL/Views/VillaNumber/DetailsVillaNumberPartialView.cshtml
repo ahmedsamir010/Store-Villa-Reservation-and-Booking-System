@@ -1,0 +1,31 @@
+﻿@model VillaNumberVM
+
+<div class="modal fade" id="DetailsVillaNumberModal-@Model.villaNumber?.Villa_Number" tabindex="-1" aria-labelledby="DetailsModalLabel-@Model.villaNumber?.Villa_Number" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">@Model.villaNumber?.Villa_Number Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <dl class="row">
+                            <dt class="col-sm-4 text-muted">Villa Number Name:</dt>
+                            <dd class="col-sm-8">@Model?.villaNumber?.Villa.Name</dd>
+
+                            <dt class="col-sm-4 text-muted">Villa Number:</dt>
+                            <dd class="col-sm-8">@Model?.villaNumber?.Villa_Number</dd>
+
+                            <dt class="col-sm-4 text-muted">Special Details:</dt>
+                            <dd class="col-sm-8">@Model?.villaNumber?.SpecialDetails</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

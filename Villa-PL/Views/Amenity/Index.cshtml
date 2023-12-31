@@ -1,0 +1,73 @@
+﻿@model AmenityVM
+
+<div class="container-fluid mt-5">
+    <div class="card border-0 shadow">
+        <div class="card-header bg-success text-white text-center">
+            <h2>Amenity List</h2>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-6 offset-6 text-end">
+                    <a asp-controller="Amenity" asp-action="Create" class="btn btn-secondary">
+                        <i class="bi bi-plus-circle"></i> Create New Amenity
+                    </a>
+                </div>
+            </div>
+
+            @if (Model.amenities != null && Model.amenities.Any())
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Amenity Name</th>
+                            <th class="text-center">Amenity Description</th>
+                            <th class="text-center">Villa Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model.amenities)
+                        {
+                            <tr class="text-center align-middle">
+                                <td>@obj.Name</td>
+                                <td>@obj.Description</td>
+                                <td>@obj.villa.Name</td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <!-- Details button and modal -->
+                                        <button type="button" class="btn btn-outline-warning me-2" data-toggle="modal" data-target="#DetailsAmenityModal-@obj.Id">
+                                            <i class="bi bi-info-square"></i> Details
+                                        </button>
+                                        @await Html.PartialAsync("DetailsAmenityPartialView", new AmenityVM { amenity = obj })
+
+                                        <!-- Edit button and modal -->
+                                        <button type="button" class="btn btn-outline-success me-2" data-toggle="modal" data-target="#EditAmenityModal-@obj.Id">
+                                            <i class="bi bi-pencil-square"></i> Edit
+                                        </button>
+                                        @await Html.PartialAsync("EditAmenityPartialView", new AmenityVM { amenity = obj, villaList = Model.villaList })
+
+
+                                        <button type="button" class="btn btn-outline-danger me-2" data-toggle="modal" data-target="#DeleteAmenityModal-@obj.Id">
+                                            <i class="bi bi-trash-fill"></i> Delete
+                                        </button>
+                                        @await Html.PartialAsync("DeleteAmenityPartialView", new AmenityVM { amenity = obj })
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <div class="container-fluid">
+
+                <div class="text-center">
+                    <p class="lead mb-4">No amenities available. Start by creating a new one!</p>
+                    <img src="~/images/empty-villa.jpeg" alt="Empty Amenity" class="img-fluid">
+                </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

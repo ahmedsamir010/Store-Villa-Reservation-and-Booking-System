@@ -1,0 +1,47 @@
+﻿@model Villa
+
+<div class="modal fade" id="DetailsVillaModal-@Model.Id" tabindex="-1" aria-labelledby="DetailsModalLabel-@Model.Id" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title">@Model.Name Details</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Display the image from the model or a placeholder if the image is not available -->
+                        <img src="@(!string.IsNullOrEmpty(Model.ImageUrl) ? Model.ImageUrl : "https://placekitten.com/600/400")" alt="@Model.Name" class="img-fluid rounded">
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row p-2">
+                            <div class="col-12">
+                                <p class="card-title text-warning" style="font-size: xx-large">@Model.Name</p>
+                                <p class="card-text" style="font-size: large">
+                                    @Html.Raw(Model.Description)
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <span class="text-muted">Price:</span>
+                                <span class="font-weight-bold">@Model.Price.ToString("c")</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-muted">Sqft:</span>
+                                <span class="font-weight-bold">@Model.Sqft</span>
+                            </div>
+                            <div class="col-md-4">
+                                <span class="text-muted">Occupancy:</span>
+                                <span class="font-weight-bold">@Model.Occupancy</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

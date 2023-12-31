@@ -1,0 +1,22 @@
+﻿@model AmenityVM
+
+<div class="modal fade" id="DeleteAmenityModal-@Model.amenity?.Id" tabindex="-1" aria-labelledby="DeleteModalLabel-@Model.amenity?.Id" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title">Delete Villa</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to delete the Amenity: <strong>@Model.amenity?.Id</strong>?</p>
+            </div>
+            <div class="modal-footer text-center">
+                <form asp-controller="Amenity" asp-action="Delete" method="post" class="d-inline">
+                    <input type="hidden" name="amenity.Id" value="@Model.amenity?.Id" />
+                    <button type="submit" class="btn btn-danger" data-bs-dismiss="modal">Delete</button>
+                </form>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

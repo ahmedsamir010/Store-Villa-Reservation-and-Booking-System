@@ -1,0 +1,64 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.navbar-brand {
+    color: #ffffff; /* White text color */
+}
+
+.navbar-toggler-icon {
+    background-color: #ffffff; /* White color for the toggler icon */
+}
+
+/* Sidebar */
+.sidebar {
+    z-index: 1000;
+    padding: 20px 0; /* Adjust padding based on your preference */
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #343a40; /* Dark background color */
+    color: #ffffff; /* White text color */
+    /* Optional: Add transition for smoother effect */
+    transition: padding 0.3s ease;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle box shadow for a lifted look */
+}
+
+.sidebar a.nav-link {
+    color: #adb5bd; /* Light text color for inactive links */
+    transition: color 0.3s ease;
+}
+
+    /* Sidebar Hover Color */
+    .sidebar a.nav-link:hover {
+        color: #3498db; /* Another color code for the hover effect */
+        transition: color 0.3s ease; /* Smooth transition effect for color */
+    }
+
+
+.navbar-dark .navbar-nav .nav-link {
+    color: #adb5bd; /* Light text color for inactive links */
+    transition: color 0.3s ease;
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: #ffffff; /* White text color for hover effect */
+    transition: color 0.3s ease; /* Smooth transition effect */
+}
+
+
+
+/* Footer */
+.footer {
+    background-color: #f8f9fa; /* Light background color */
+}
+
+/* DataTables Filter */
+.dataTables_filter {
+    margin-bottom: 30px;
+}
